@@ -1,25 +1,21 @@
-import { useState } from 'react'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PNRChecker from "./components/PNRChecker";
+import Header from "./components/Header";
+import "./App.css";
 
-type AuthScreen = 'login' | 'signup'
-
-function App() {
-  const [currentScreen, setCurrentScreen] = useState<AuthScreen>('login')
-
-  const switchToSignup = () => setCurrentScreen('signup')
-  const switchToLogin = () => setCurrentScreen('login')
-
+const App = () => {
   return (
-    <div className="app">
-      {currentScreen === 'login' ? (
-        <Login onSwitchToSignup={switchToSignup} />
-      ) : (
-        <Signup onSwitchToLogin={switchToLogin} />
-      )}
-    </div>
-  )
-}
+    <Router>
+      <div className="App">
+        <Header />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<PNRChecker />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
